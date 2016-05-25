@@ -16,7 +16,8 @@
     "url": "https://github.com/Charimon/react-native-cardView/issues"
   },
   "homepage": "https://github.com/Charimon/react-native-cardView",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "react": "^15.1.0",
     "react-native": "^0.26.2"
   }
