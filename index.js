@@ -22,7 +22,6 @@ class CardsView extends Component {
   
   getCardIndex(offset, velocity) {
     const VELOCITY_SCALE  = 0.6;
-    console.log(velocity.x);
     const velocityOffset = {x:0, y:0};
     
     const CUTOFF_MIN = 0.5;
@@ -40,7 +39,6 @@ class CardsView extends Component {
     else if(velocity.y < CUTOFF_MAX) velocityOffset.y = this.state.height * 0.5 * (velocity.y/CUTOFF_MAX);
     else velocityOffset.y = this.state.height;
     
-    console.log(`${velocity.x} :: ${velocityOffset.x}`)
     const center = {x:this.state.width * 0.5 + offset.x + velocityOffset.x, y: this.state.height * 0.5 + offset.y + velocityOffset.y};
 
     if(this.state.childDimensions) {
@@ -140,6 +138,8 @@ class CardsView extends Component {
 CardsView.defaultProps = {
   horizontal : true,
   scrollEventThrottle: 100,
+  showsHorizontalScrollIndicator: false,
+  showsVerticalScrollIndicator: false,
 }
 
 CardsView.propTypes = {
@@ -148,6 +148,8 @@ CardsView.propTypes = {
   cardWidth: React.PropTypes.oneOfType([React.PropTypes.func, React.PropTypes.number]),
   cardHeight: React.PropTypes.oneOfType([React.PropTypes.func, React.PropTypes.number]),
   onSelectedCard: React.PropTypes.func,
+  showsHorizontalScrollIndicator: React.PropTypes.bool,
+  showsVerticalScrollIndicator: React.PropTypes.bool,
 }
 
 export default CardsView;
