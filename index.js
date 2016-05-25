@@ -63,6 +63,26 @@ class CardsView extends Component {
     if(this.props.horizontal) this.scrollView.scrollTo({x});
     else this.scrollView.scrollTo({y});
   }
+
+  getCardWidth(child, layoutWidth, layoutHeight) {
+    if(child == null) return layoutWidth;
+    if(child.props.cardWidth == null) return layoutWidth;
+    if(child.props.cardWidth instanceof Function) {
+      return layoutWidth({width:child.props.cardWidth, height:child.props.cardHeight},{width: layoutWidth, height: layoutHeight});
+    } else {
+      return parseFloat(child.props.cardWidth)
+    }
+  }
+
+  getCardHeight(child, layoutWidth, layoutHeight) {
+    if(child == null) return layoutHeight;
+    if(child.props.cardHeight == null) return layoutHeight;
+    if(child.props.cardHeight instanceof Function) {
+      return layoutHeight({width:child.props.cardWidth, height:child.props.cardHeight},{width: layoutWidth, height: layoutHeight});
+    } else {
+      return parseFloat(child.props.cardHeight)
+    }
+  }
   
   onLayout(e) {
     const layoutWidth = e.nativeEvent.layout.width || 0;
@@ -70,8 +90,8 @@ class CardsView extends Component {
     
     let dimAcc = {x:0, y:0};
     const childDimensions = this.props.children && this.props.children.map( (child, i) => {
-      const width = layoutWidth * parseFloat(child.props.cardWidth || 100)/100;
-      const height = layoutHeight * parseFloat(child.props.cardHeight || 100)/100;
+      const width = this.getCardWidth(child, layoutWidth, layoutHeight);
+      const height = this.getCardHeight(child, layoutWidth, layoutHeight);
       const x = dimAcc.x;
       const y = dimAcc.y;
       dimAcc.x += width;
