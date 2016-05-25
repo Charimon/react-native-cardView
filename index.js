@@ -129,7 +129,8 @@ class CardsView extends Component {
       scrollEventThrottle={this.props.scrollEventThrottle}
       horizontal={this.props.horizontal}
       onLayout={this.onLayout.bind(this)}
-      contentContainerStyle={{paddingLeft, paddingRight, paddingTop, paddingBottom}}>
+      contentContainerStyle={{paddingLeft, paddingRight, paddingTop, paddingBottom}}
+      {...this.props}>
       {children}
   </ScrollView>
   }
