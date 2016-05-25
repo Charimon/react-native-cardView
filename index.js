@@ -68,7 +68,7 @@ class CardsView extends Component {
     if(child == null) return layoutWidth;
     if(child.props.cardWidth == null) return layoutWidth;
     if(child.props.cardWidth instanceof Function) {
-      return layoutWidth({width:child.props.cardWidth, height:child.props.cardHeight},{width: layoutWidth, height: layoutHeight});
+      return parseFloat(layoutWidth({width: layoutWidth, height: layoutHeight}));
     } else {
       return parseFloat(child.props.cardWidth)
     }
@@ -78,7 +78,7 @@ class CardsView extends Component {
     if(child == null) return layoutHeight;
     if(child.props.cardHeight == null) return layoutHeight;
     if(child.props.cardHeight instanceof Function) {
-      return layoutHeight({width:child.props.cardWidth, height:child.props.cardHeight},{width: layoutWidth, height: layoutHeight});
+      return parseFloat(layoutHeight({width: layoutWidth, height: layoutHeight}));
     } else {
       return parseFloat(child.props.cardHeight)
     }
