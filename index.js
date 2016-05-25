@@ -13,6 +13,11 @@ class CardsView extends Component {
   }
   
   onScroll (options) {
+    if(this.props.onScroll) this.props.onScroll(options);
+  }
+  
+  onSelectedCard (index) {
+    if(this.props.onSelectedCard) this.props.onSelectedCard(index);
   }
   
   getCardIndex(offset, velocity) {
@@ -62,6 +67,8 @@ class CardsView extends Component {
     
     if(this.props.horizontal) this.scrollView.scrollTo({x});
     else this.scrollView.scrollTo({y});
+    
+    this.onSelectedCard(index);
   }
 
   getCardWidth(child, layoutWidth, layoutHeight) {
@@ -121,7 +128,7 @@ class CardsView extends Component {
       ref={(scrollView) => { this.scrollView = scrollView; }}
       onScrollEndDrag={this.onScrollEndDrag.bind(this)}
       onScroll={this.onScroll.bind(this)}
-      scrollEventThrottle={100}
+      scrollEventThrottle={this.props.scrollEventThrottle}
       horizontal={this.props.horizontal}
       onLayout={this.onLayout.bind(this)}
       contentContainerStyle={{paddingLeft, paddingRight, paddingTop, paddingBottom}}>
@@ -132,6 +139,15 @@ class CardsView extends Component {
 
 CardsView.defaultProps = {
   horizontal : true,
+  scrollEventThrottle: 100,
+}
+
+CardsView.propTypes = {
+  horizontal : React.PropTypes.bool,
+  scrollEventThrottle: React.PropTypes.number,
+  cardWidth: React.PropTypes.oneOfType([React.PropTypes.func, React.PropTypes.number]),
+  cardHeight: React.PropTypes.oneOfType([React.PropTypes.func, React.PropTypes.number]),
+  onSelectedCard: React.PropTypes.func,
 }
 
 export default CardsView;
