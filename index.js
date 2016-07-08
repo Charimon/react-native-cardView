@@ -121,16 +121,15 @@ class CardsView extends Component {
     const paddingTop = this.state.childDimensions && this.state.childDimensions[0] && this.state.childDimensions[0].height? (this.state.height - this.state.childDimensions[0].height)/2: 0
     const paddingBottom = this.state.childDimensions && this.state.childDimensions[this.state.childDimensions.length - 1] && this.state.childDimensions[this.state.childDimensions.length - 1].height? (this.state.height - this.state.childDimensions[this.state.childDimensions.length - 1].height)/2 :0
     
-    
     return <ScrollView
+      {...this.props}
       ref={(scrollView) => { this.scrollView = scrollView; }}
       onScrollEndDrag={this.onScrollEndDrag.bind(this)}
       onScroll={this.onScroll.bind(this)}
       scrollEventThrottle={this.props.scrollEventThrottle}
       horizontal={this.props.horizontal}
       onLayout={this.onLayout.bind(this)}
-      contentContainerStyle={{paddingLeft, paddingRight, paddingTop, paddingBottom}}
-      {...this.props}>
+      contentContainerStyle={[{paddingLeft, paddingRight, paddingTop, paddingBottom}, this.props.contentContainerStyle]}>
       {children}
   </ScrollView>
   }
